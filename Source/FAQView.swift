@@ -152,7 +152,7 @@ public class FAQView: UIView {
   
   // MARK: Initialization
   
-  public init(frame: CGRect,title: String = "Top Queries", items: [FAQItem]) {
+  public init(frame: CGRect,title: String = "FREQUENTLY ASKED", items: [FAQItem]) {
     self.items = items
     super.init(frame: frame)
     expandedCells = Array(repeating: CellOperation.collapsed, count: items.count)
@@ -254,6 +254,10 @@ extension FAQView: UITableViewDelegate, UITableViewDataSource {
     let cellOperation = expandedCells[indexPath.section]
     cell.configure(currentItem: currentItem, indexPath: indexPath, cellOperation: cellOperation)
     updateCellOperation(section: indexPath.section, cellOperation: cellOperation)
+    
+    cell.layer.cornerRadius = 10
+    cell.layer.masksToBounds = true
+    
     cell.didSelectQuestion = { [weak self] cell in
       guard let faqView = self else {
         return
@@ -318,10 +322,10 @@ public class FAQConfiguration {
   func defaultValue() {
     self.questionTextColor = UIColor.black
     self.answerTextColor = UIColor.black
-    self.questionTextFont = UIFont(name: "HelveticaNeue-Bold", size: 16)
-    self.answerTextFont = UIFont(name: "HelveticaNeue-Light", size: 15)
+    self.questionTextFont = UIFont.boldSystemFont(ofSize: 16)
+    self.answerTextFont = UIFont.systemFont(ofSize: 15)
     self.titleTextColor = UIColor.black
-    self.titleTextFont = UIFont(name: "HelveticaNeue-Light", size: 20)
+    self.titleTextFont = UIFont.boldSystemFont(ofSize: 16)
     self.titleLabelBackgroundColor = UIColor.clear
     let colorValue: CGFloat = 210/255
     self.viewBackgroundColor = UIColor(red: colorValue, green: colorValue, blue: colorValue, alpha: 1)
